@@ -25,12 +25,11 @@ public class KafkaProducer {
                 .setEmail(patient.getEmail())
                 .setEventType("PATIENT_CREATED")
                 .build();
-        log.info("Sending event to Kafka: {}", event);
 
         try {
             kafkaTemplate.send("patient", event.toByteArray());
         } catch (Exception e) {
-            log.error("Error sending PatientCreated event: {}", event,e);
+            log.error("Error sending PatientCreated event: {}", event);
         }
     }
 }
