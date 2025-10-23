@@ -1,4 +1,5 @@
 package com.pm.patientservice.kafka;
+
 import com.pm.patientservice.model.Patient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ public class KafkaProducer {
                 .setEmail(patient.getEmail())
                 .setEventType("PATIENT_CREATED")
                 .build();
+        log.info("Sending event to Kafka: {}", event);
 
         try {
             kafkaTemplate.send("patient", event.toByteArray());

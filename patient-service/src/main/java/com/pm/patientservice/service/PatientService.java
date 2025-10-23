@@ -21,10 +21,9 @@ public class PatientService {
     private final BillingServiceGrpcClient billingServiceGrpcClient;
     private final KafkaProducer kafkaProducer;
 
-    public PatientService(PatientRepository patientRepository
-                           ,BillingServiceGrpcClient billingServiceGrpcClient
-                           ,KafkaProducer kafkaProducer
-                          ){
+    public PatientService(PatientRepository patientRepository,
+                          BillingServiceGrpcClient billingServiceGrpcClient,
+                          KafkaProducer kafkaProducer) {
         this.patientRepository = patientRepository;
         this.billingServiceGrpcClient = billingServiceGrpcClient;
         this.kafkaProducer = kafkaProducer;
@@ -32,6 +31,7 @@ public class PatientService {
 
     public List<PatientResponseDTO> getPatients() {
         List<Patient> patients = patientRepository.findAll();
+
         return patients.stream().map(PatientMapper::toDTO).toList();
     }
 
@@ -45,13 +45,14 @@ public class PatientService {
         Patient newPatient = patientRepository.save(
                 PatientMapper.toModel(patientRequestDTO));
 
-       billingServiceGrpcClient.createBillingAccount(newPatient.getId().toString(),
+        billingServiceGrpcClient.createBillingAccount(newPatient.getId().toString(),
                 newPatient.getName(), newPatient.getEmail());
 
-       kafkaProducer.sendEvent(newPatient);
+        kafkaProducer.sendEvent(newPatient);
 
         return PatientMapper.toDTO(newPatient);
     }
+
     public PatientResponseDTO updatePatient(UUID id,
                                             PatientRequestDTO patientRequestDTO) {
 
@@ -73,6 +74,7 @@ public class PatientService {
         Patient updatedPatient = patientRepository.save(patient);
         return PatientMapper.toDTO(updatedPatient);
     }
+
     public void deletePatient(UUID id) {
         patientRepository.deleteById(id);
     }
