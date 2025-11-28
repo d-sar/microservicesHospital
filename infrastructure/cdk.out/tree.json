@@ -1128,9 +1128,9 @@
                   "instanceType": "kafka.m5.xlarge",
                   "brokerAzDistribution": "DEFAULT"
                 },
-                "clusterName": "kafa-cluster",
-                "kafkaVersion": "2.8.0",
-                "numberOfBrokerNodes": 1
+                "clusterName": "kafka-cluster",
+                "kafkaVersion": "3.7.x",
+                "numberOfBrokerNodes": 2
               }
             },
             "constructInfo": {
@@ -2779,12 +2779,12 @@
                         },
                         "environment": [
                           {
-                            "name": "SPRING_PROFILES_ACTIVE",
-                            "value": "prod"
-                          },
-                          {
                             "name": "AUTH_SERVICE_URL",
                             "value": "http://host.docker.internal:4005"
+                          },
+                          {
+                            "name": "SPRING_PROFILES_ACTIVE",
+                            "value": "prod"
                           }
                         ]
                       }

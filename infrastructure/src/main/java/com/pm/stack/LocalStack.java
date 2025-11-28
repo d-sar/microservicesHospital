@@ -143,9 +143,9 @@ public class LocalStack extends Stack {
 
     private CfnCluster createMskCluster(){
         return CfnCluster.Builder.create(this, "MskCluster")
-                .clusterName("kafa-cluster")
-                .kafkaVersion("2.8.0")
-                .numberOfBrokerNodes(1)
+                .clusterName("kafka-cluster")
+                .kafkaVersion("3.7.x")
+                .numberOfBrokerNodes(2)
                 .brokerNodeGroupInfo(CfnCluster.BrokerNodeGroupInfoProperty.builder()
                         .instanceType("kafka.m5.xlarge")
                         .clientSubnets(vpc.getPrivateSubnets().stream()
