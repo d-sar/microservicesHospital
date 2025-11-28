@@ -21,8 +21,6 @@ This project demonstrates a full microservices solution tailored for a hospital 
 - [Getting Started](#getting-started)
 - [API Documentation](#api-documentation)
 - [Testing](#testing)
-- [Development Timeline](#development-timeline)
-- [Contributing](#contributing)
 - [License](#license)
 
 ---
